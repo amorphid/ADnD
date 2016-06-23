@@ -16,4 +16,15 @@ defmodule Dice do
 
     def threeD6, do: d6 + d6 + d6
 
+    # roll 3D6
+    defmacro roll(dice_expression) do
+        quote bind_quoted: [dice_expression: dice_expression] do
+            #result = unquote(dice_expression)
+            #IO.puts("Rolling #{to_string(dice_expression)} : #{result}")
+            #result
+            IO.puts("Rolling : #{dice_expression}!")
+            dice_expression
+        end
+    end
+
 end
