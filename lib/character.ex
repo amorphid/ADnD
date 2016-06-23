@@ -7,7 +7,15 @@ defmodule Character do
         def roll_stats() do
             %Stats{ strength: threeD6, intelligence: threeD6, wisdom: threeD6, 
                     dexterity: threeD6, constitution: threeD6, charisma: threeD6 }
-            
+        end
+
+        def roll_stats(s = %Stats{}) do
+            r = Map.update!(s, :strength, fn 0 -> threeD6; value -> value end) 
+            r = Map.update!(r, :intelligence, fn 0 -> threeD6; value -> value end)
+            r = Map.update!(r, :wisdom, fn 0 -> threeD6; value -> value end)
+            r = Map.update!(r, :dexterity, fn 0 -> threeD6; value -> value end)
+            r = Map.update!(r, :constitution, fn 0 -> threeD6; value -> value end)
+            Map.update!(r, :charisma, fn 0 -> threeD6; value -> value end)
         end
     end
 
