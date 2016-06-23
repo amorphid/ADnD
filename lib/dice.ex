@@ -16,13 +16,12 @@ defmodule Dice do
 
     def threeD6, do: d6 + d6 + d6
 
-    # roll 3D6
+    # roll d20 should display "Rolling #d20 : 17!" (where 17 will be whatever # is generated.)
     defmacro roll(dice_expression) do
         quote bind_quoted: [dice_expression: dice_expression] do
-            #result = unquote(dice_expression)
-            #IO.puts("Rolling #{to_string(dice_expression)} : #{result}")
-            #result
-            IO.puts("Rolling : #{dice_expression}!")
+            #IO.puts("Rolling #{String.to_atom(dice_expression)} : #{dice_expression}!")
+            #IO.puts("Rolling #{inspect @dice_expression} : #{dice_expression}!")
+            IO.puts("Rolling #{Macro.escape(dice_expression)} : #{dice_expression}!")
             dice_expression
         end
     end
