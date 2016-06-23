@@ -14,4 +14,6 @@ defmodule Dice do
 
     def d100, do: :random.uniform(100)
 
+    def threeD6, do: d6 + d6 + d6
+
 end

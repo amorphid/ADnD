@@ -1,8 +1,17 @@
 defmodule Character do
+    import Dice
 
     defmodule Stats do
         defstruct strength: 0, intelligence: 0, wisdom: 0, dexterity: 0, constitution: 0, charisma: 0
+
+        def roll_stats() do
+            %Stats{ strength: threeD6, intelligence: threeD6, wisdom: threeD6, 
+                    dexterity: threeD6, constitution: threeD6, charisma: threeD6 }
+            
+        end
     end
+
+    defstruct name: "", stats: %Stats{}
 end
 
 defimpl Inspect, for: Character.Stats do
