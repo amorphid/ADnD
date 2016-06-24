@@ -3,23 +3,29 @@ defmodule Character do
 
     defmodule Stats do
         defstruct strength: 0, intelligence: 0, wisdom: 0, dexterity: 0, constitution: 0, charisma: 0
-
-        def roll_stats() do
-            %Stats{ strength: threeD6, intelligence: threeD6, wisdom: threeD6, 
-                    dexterity: threeD6, constitution: threeD6, charisma: threeD6 }
-        end
-
-        def roll_stats(s = %Stats{}) do
-            r = Map.update!(s, :strength, fn 0 -> threeD6; value -> value end) 
-            r = Map.update!(r, :intelligence, fn 0 -> threeD6; value -> value end)
-            r = Map.update!(r, :wisdom, fn 0 -> threeD6; value -> value end)
-            r = Map.update!(r, :dexterity, fn 0 -> threeD6; value -> value end)
-            r = Map.update!(r, :constitution, fn 0 -> threeD6; value -> value end)
-            Map.update!(r, :charisma, fn 0 -> threeD6; value -> value end)
-        end
     end
 
     defstruct name: "", stats: %Stats{}
+
+    def roll_stats() do
+        %Stats{ strength: threeD6, intelligence: threeD6, wisdom: threeD6, 
+                dexterity: threeD6, constitution: threeD6, charisma: threeD6 }
+    end
+
+    def roll_stats(c = %Character{}) do
+        c = %Character{ c | stats: roll_stats(c.stats) }
+        c
+    end
+
+    def roll_stats(s = %Stats{}) do
+        r = Map.update!(s, :strength, fn 0 -> threeD6; value -> value end) 
+        r = Map.update!(r, :intelligence, fn 0 -> threeD6; value -> value end)
+        r = Map.update!(r, :wisdom, fn 0 -> threeD6; value -> value end)
+        r = Map.update!(r, :dexterity, fn 0 -> threeD6; value -> value end)
+        r = Map.update!(r, :constitution, fn 0 -> threeD6; value -> value end)
+        Map.update!(r, :charisma, fn 0 -> threeD6; value -> value end)
+    end
+
 end
 
 defimpl Inspect, for: Character.Stats do
